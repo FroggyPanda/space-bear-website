@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply grid min-h-[100vh] min-h-[100dvh];
+  grid-template-rows: auto 1fr auto;
+}
+
+a:hover:not(#nav-logo) {
+  @apply text-slate-400;
+}
+
+.loader {
+  @apply h-20 w-20 border-white border-8 border-t-blue-600 rounded-full;
+  animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
