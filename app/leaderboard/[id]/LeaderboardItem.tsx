@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import FirstMedal from '@/public/t-medal-1.svg';
+import SecondMedal from '@/public/t-medal-2.svg';
+import ThirdMedal from '@/public/t-medal-3.svg';
 
 type Props = {
   place: number;
@@ -72,7 +75,15 @@ export default function LeaderboardItem(props: Props) {
       <div className="rounded-lg py-3 pl-6 pr-4 w-full grid grid-cols-3 bg-neutral-800">
         <div className="flex items-center justify-start col-span-2">
           <p className="min-w-[2rem] w-8 h-8 rounded-full flex items-center justify-center mr-6 font-bold text-dark-100 bg-dark-500 text-base">
-            {props.place}
+            {props.place === 1 ? (
+              <Image src={FirstMedal} alt="First Place" />
+            ) : props.place === 2 ? (
+              <Image src={SecondMedal} alt="Second Place" />
+            ) : props.place === 3 ? (
+              <Image src={ThirdMedal} alt="Third Place" />
+            ) : (
+              props.place
+            )}
           </p>
           <Image
             className="w-9 aspect-square rounded-full"
