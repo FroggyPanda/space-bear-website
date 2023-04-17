@@ -9,6 +9,63 @@ type Props = {
   level: number;
 };
 
+function LevelProgress(level: number, xp: number): JSX.Element {
+  const xpNeededForNextLevel = (level: number, xp: number) => {
+    return Math.ceil(
+      5 * (level + 1) * (level + 1) + 50 * (level + 1) + 100 - xp
+    );
+  };
+
+  const maxXP = xpNeededForNextLevel(level, xp);
+  const progess = 360 * (xp / maxXP);
+
+  if (progess <= 180) {
+    return (
+      <div className="leaderboardPlayerStat flex flex-col justify-center lg:items-center rounded-full p-px w-[40px] h-[40px] min-w-[40px] min-h-[40px] relative p30">
+        <div className="h-full w-full border-2 border-solid border-neutral-900 absolute rounded-full"></div>
+        <div
+          className="absolute w-[40px] h-[40px] min-w-[40px] min-h-[40px] top-0 left-0"
+          style={{ clip: 'rect(0px, 40px, 40px, 20px)' }}>
+          <div
+            className="absolute border-2 border-solid w-[40px] h-[40px] min-w-[40px] min-h-[40px] top-0 left-0 rounded-full border-orange-400"
+            style={{
+              clip: 'rect(0px, 20px, 40px, 0px)',
+              transform: `rotate(${progess}deg)`,
+            }}></div>
+        </div>
+        <div className="flex flex-col items-center justify-center -mt-px">
+          <div className="font-bold text-white text-base">{level}</div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="leaderboardPlayerStat flex flex-col justify-center lg:items-center rounded-full p-px w-[40px] h-[40px] min-w-[40px] min-h-[40px] relative p82">
+        <div className="h-full w-full border-2 border-solid border-neutral-900 absolute rounded-full"></div>
+        <div
+          className="absolute w-[40px] h-[40px] min-w-[40px] min-h-[40px] top-0 left-0"
+          style={{ clip: 'rect(auto, auto, auto, auto)' }}>
+          <div
+            className="absolute border-2 border-solid w-[40px] h-[40px] min-w-[40px] min-h-[40px] top-0 left-0 rounded-full border-green-400"
+            style={{
+              clip: 'rect(0px, 20px, 40px, 0px)',
+              transform: `rotate(${progess}deg)`,
+            }}></div>
+          <div
+            className="absolute border-2 border-solid w-[40px] h-[40px] min-w-[40px] min-h-[40px] rounded-full top-0 left-0 border-green-400"
+            style={{
+              clip: 'rect(0px, 20px, 40px, 0px)',
+              transform: 'rotate(180deg)',
+            }}></div>
+        </div>
+        <div className="flex flex-col items-center justify-center -mt-px">
+          <div className="font-bold text-white text-base">{level}</div>
+        </div>
+      </div>
+    );
+  }
+}
+
 export default function LeaderboardItem(props: Props) {
   return (
     <div className="block">
@@ -36,11 +93,7 @@ export default function LeaderboardItem(props: Props) {
             {props.xp}
           </p>
           <div className="flex items-center justify-center">
-            <div className="leaderboardPlayerStat flex flex-col justify-center lg:items-center rounded-full p-px w-[40px] h-[40px] min-w-[40px] min-h-[40px] relative p72">
-              <div className="flex flex-col items-center justify-center -mt-px">
-                <p className="font-bold text-white text-base">{props.level}</p>
-              </div>
-            </div>
+            {LevelProgress(props.level, props.xp)}
           </div>
         </div>
       </div>
