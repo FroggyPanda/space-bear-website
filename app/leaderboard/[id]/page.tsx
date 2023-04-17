@@ -29,9 +29,6 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
       },
-      next: {
-        revalidate: 30 * 60,
-      },
     }).then((v) => v.json());
 
     return {
@@ -70,6 +67,10 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
 
   return leaderboardItems;
 }
+
+// Caches the leaderboard and rechecks it every 30mins
+// https://beta.nextjs.org/docs/data-fetching/caching
+export const revalidate = 30 * 60;
 
 export default async function LeaderboardPage({ params }: any) {
   const leaderboardItems: JSX.Element[] = await fetchLeaderboardItems(
