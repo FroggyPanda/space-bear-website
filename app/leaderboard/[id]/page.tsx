@@ -137,7 +137,7 @@ export default async function LeaderboardPage({ params }: any) {
         </div>
         <div>
           <div className="bg-neutral-900 rounded-lg">
-            <h3 className="text-h6 py-4 lg:py-6 px-6">How it works?</h3>
+            <h3 className="text-h6 py-4 lg:py-6 px-6">How it works</h3>
             <div className="p-6 pt-0 text-neutral-400">
               <div className="w-full border-t border-solid border-neutral-700 pt-4"></div>
               <p>
