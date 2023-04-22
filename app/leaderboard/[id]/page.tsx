@@ -106,31 +106,49 @@ export default async function LeaderboardPage({ params }: any) {
       <h1 className="text-3xl text-center my-3 font-bold">
         {discordGuild.name}
       </h1>
-      <div className="relative bg-neutral-900 shadow-xs sub_feature_card mb-4 rounded-lg">
-        <h3 className="text-h6 text-neutral-100 flex justify-between items-start hover:text-neutral-200 py-4 lg:py-6 px-6">
-          Leaderboard
-        </h3>
-        <div className="p-6 pt-0">
-          <div className="grid w-full border-t border-solid border-neutral-700 pt-4"></div>
-          <div className="grid grid-cols-1 gap-1.5">
-            <div className="grid grid-cols-3 pl-6 pr-4 py-3">
-              <div className="col-span-2 flex items-center justify-start">
-                <p className="text-sm text-neutral-300 w-9 text-center mr-6">
-                  #
-                </p>
-                <p className="text-sm text-neutral-300">User</p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-10">
+        <div className="relative bg-neutral-900 shadow-xs sub_feature_card mb-4 rounded-lg lg:col-span-2">
+          <h3 className="text-h6 text-neutral-100 flex justify-between items-start hover:text-neutral-200 py-4 lg:py-6 px-6">
+            Leaderboard
+          </h3>
+          <div className="p-6 pt-0">
+            <div className="grid w-full border-t border-solid border-neutral-700 pt-4"></div>
+            <div className="grid grid-cols-1 gap-1.5">
+              <div className="grid grid-cols-3 pl-6 pr-4 py-3">
+                <div className="col-span-2 flex items-center justify-start">
+                  <p className="text-sm text-neutral-300 w-9 text-center mr-6">
+                    #
+                  </p>
+                  <p className="text-sm text-neutral-300">User</p>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3">
+                  <p className="text-sm text-neutral-300 text-center hidden lg:block">
+                    Messages
+                  </p>
+                  <p className="text-sm text-neutral-300 text-center hidden lg:block">
+                    XP
+                  </p>
+                  <p className="text-sm text-neutral-300 text-center">Level</p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-3">
-                <p className="text-sm text-neutral-300 text-center hidden lg:block">
-                  Messages
-                </p>
-                <p className="text-sm text-neutral-300 text-center hidden lg:block">
-                  XP
-                </p>
-                <p className="text-sm text-neutral-300 text-center">Level</p>
-              </div>
+              <div className="grid grid-cols-1 gap-1.5">{leaderboardItems}</div>
             </div>
-            <div className="grid grid-cols-1 gap-1.5">{leaderboardItems}</div>
+          </div>
+        </div>
+        <div>
+          <div className="bg-neutral-900 rounded-lg">
+            <h3 className="text-h6 py-4 lg:py-6 px-6">How it works?</h3>
+            <div className="p-6 pt-0 text-neutral-400">
+              <div className="w-full border-t border-solid border-neutral-700 pt-4"></div>
+              <p>
+                Every two minutes that you&apos;re messaging, you randomly gain
+                between 15 and 20 XP.
+              </p>
+              <p className="mt-4">
+                To avoid spamming, the server can select which channels you can
+                earn XP from.
+              </p>
+            </div>
           </div>
         </div>
       </div>
