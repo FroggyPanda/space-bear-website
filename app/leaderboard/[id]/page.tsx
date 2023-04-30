@@ -91,7 +91,7 @@ export default async function LeaderboardPage({ params }: any) {
   return (
     <div>
       <div className="flex justify-center items-center my-4">
-        {true ? (
+        {discordGuild.icon ? (
           <div
             className="mx-auto h-[12rem] w-[12rem] rounded-3xl border-4 border-solid border-white bg-cover bg-center relative z-20"
             style={{
