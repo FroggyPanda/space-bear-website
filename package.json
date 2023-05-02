@@ -10,7 +10,7 @@
     "gen-types": "npx supabase gen types typescript --linked --schema public > ./lib/schema.ts && npx better-supabase-types"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.20.0",
+    "@supabase/supabase-js": "^2.21.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
