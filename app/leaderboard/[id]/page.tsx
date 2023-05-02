@@ -16,7 +16,11 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
 
   const leaderboardItems: JSX.Element[] = [];
 
-  const res = await supabase.from('member').select().eq('server_id', id);
+  const res = await supabase
+    .from('member')
+    .select()
+    .eq('server_id', id)
+    .gte('message', 1);
 
   if (res.error) notFound();
   if (res.data.length < 1) notFound();
