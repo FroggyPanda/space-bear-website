@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen-types": "npx supabase gen types typescript --linked > ./lib/schema.ts"
+    "gen-types": "npx supabase gen types typescript --linked --schema public > ./lib/schema.ts && npx better-supabase-types"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.20.0",
@@ -23,6 +23,9 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4"
+  },
+  "betterConfig": {
+    "input": "./lib/schema.ts",
+    "force": true
   }
 }
-
