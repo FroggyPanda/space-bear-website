@@ -72,7 +72,56 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
   return leaderboardItems;
 }
 
-// Caches the leaderboard and rechecks it every 30mins
+async function fetchLevelRanks(id: string): Promise<JSX.Element[]> {
+  const levelRanks: JSX.Element[] = [];
+  const res = await supabase.from('server').select().eq('server_id', id);
+
+  if (res.error) notFound();
+  if (1 > res.data.length || res.data.length < 1) notFound();
+
+  const guild = await fetch(`https://discord.com/api/guilds/${id}`, {
+    headers: {
+      Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+    },
+  }).then((v) => v.json());
+
+  const levelRoles = [];
+
+  for (let i = 0; i < guild.roles.length; i++) {
+    const currID = guild.roles[i].id;
+    const matchingElement = res.data[0].level_ranks.find(
+      (e) => e.role_id === currID
+    );
+
+    if (matchingElement) {
+      levelRoles.push({
+        name: guild.roles[i].name,
+        color: `#${guild.roles[i].color.toString(16)}`,
+        level: matchingElement.level,
+      });
+    }
+  }
+
+  levelRoles.sort((a, b) => b.level - a.level);
+
+  for (const role of levelRoles) {
+    levelRanks.push(
+      <div className="mb-3 font-normal">
+        <p className="text-neutral-500 mb-1 text-xs">LEVEL {role.level}</p>
+        <div className="flex items-center justify-start gap-2 flex-wrap bg-neutral-600 rounded-full max-w-max pl-1 pr-2 py-[0.05rem] text-white">
+          <div
+            className="h-4 w-4 rounded-full"
+            style={{ backgroundColor: role.color }}></div>
+          @{role.name}
+        </div>
+      </div>
+    );
+  }
+
+  return levelRanks;
+}
+
+// Caches the page and rechecks it every 30mins
 // https://beta.nextjs.org/docs/data-fetching/caching
 export const revalidate = 30 * 60;
 
@@ -80,6 +129,8 @@ export default async function LeaderboardPage({ params }: any) {
   const leaderboardItems: JSX.Element[] = await fetchLeaderboardItems(
     params.id
   );
+
+  const levelRanks: JSX.Element[] = await fetchLevelRanks(params.id);
 
   const discordGuild = await fetch(
     `https://discord.com/api/guilds/${params.id}`,
@@ -140,7 +191,7 @@ export default async function LeaderboardPage({ params }: any) {
           </div>
         </div>
         <div>
-          <div className="bg-neutral-900 rounded-lg">
+          <div className="bg-neutral-900 rounded-lg mb-4">
             <h3 className="text-h6 py-4 lg:py-6 px-6">How it works</h3>
             <div className="p-6 pt-0 text-neutral-400">
               <div className="w-full border-t border-solid border-neutral-700 pt-4"></div>
@@ -152,6 +203,13 @@ export default async function LeaderboardPage({ params }: any) {
                 To avoid spamming, the server can select which channels you can
                 earn XP from.
               </p>
+            </div>
+          </div>
+          <div className="bg-neutral-900 rounded-lg mb-4">
+            <h3 className="text-h6 py-4 lg:py-6 px-6">Role Rewards</h3>
+            <div className="p-6 pt-0 text-neutral-400 text-sm">
+              <div className="w-full border-t border-solid border-neutral-700 pt-4"></div>
+              {levelRanks}
             </div>
           </div>
         </div>
