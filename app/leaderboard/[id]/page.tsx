@@ -19,7 +19,7 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
   const res = await supabase
     .from('member')
     .select()
-    .eq('server_id', id)
+    .eq('guild_id', id)
     .gte('message', 1);
 
   if (res.error) notFound();
@@ -74,7 +74,7 @@ async function fetchLeaderboardItems(id: string): Promise<JSX.Element[]> {
 
 async function fetchLevelRanks(id: string): Promise<JSX.Element[]> {
   const levelRanks: JSX.Element[] = [];
-  const res = await supabase.from('server').select().eq('server_id', id);
+  const res = await supabase.from('guild').select().eq('guild_id', id);
 
   if (res.error) notFound();
   if (1 > res.data.length || res.data.length < 1) notFound();
