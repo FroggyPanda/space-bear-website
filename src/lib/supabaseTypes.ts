@@ -126,8 +126,8 @@ export interface Database {
   };
 }
 
-//Schema: public
-//Tables
+// Schema: public
+// Tables
 export type Guild = Database['public']['Tables']['guild']['Row'];
 export type InsertGuild = Database['public']['Tables']['guild']['Insert'];
 export type UpdateGuild = Database['public']['Tables']['guild']['Update'];

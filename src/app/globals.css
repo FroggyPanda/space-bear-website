@@ -2,17 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply grid min-h-[100vh] min-h-[100dvh];
-  grid-template-rows: auto 1fr auto;
-}
-
-a:hover:not(#nav-logo) {
-  @apply text-slate-400;
-}
-
 .loader {
-  @apply h-20 w-20 border-white border-8 border-t-blue-600 rounded-full;
+  @apply h-20 w-20 rounded-full border-8 border-white border-t-blue-600;
   animation: loading 0.75s ease infinite;
 }
 
@@ -24,4 +15,3 @@ a:hover:not(#nav-logo) {
     transform: rotate(1turn);
   }
 }
-
