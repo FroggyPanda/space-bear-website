@@ -7,25 +7,31 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen-types": "npx supabase gen types typescript --linked --schema public > ./lib/schema.ts && npx better-supabase-types"
+    "format": "prettier --write .",
+    "sb:types": "supabase gen types typescript --project-id xrflzqomcvbmhaganhbf --schema public > ./src/lib/supabaseTypes.ts && better-supabase-types -i ./src/lib/supabaseTypes.ts -f"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.21.0",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
-    "@types/react-dom": "18.0.11",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.38.0",
-    "eslint-config-next": "13.3.0",
-    "next": "13.3.0",
-    "postcss": "8.4.21",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.1",
-    "typescript": "5.0.4"
+    "class-variance-authority": "^0.7.0",
+    "next": "13.5.4",
+    "react": "^18",
+    "react-dom": "^18"
   },
-  "betterConfig": {
-    "input": "./lib/schema.ts",
-    "force": true
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "better-supabase-types": "^2.6.1",
+    "daisyui": "^3.9.2",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.0.0",
+    "postcss": "^8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.5",
+    "supabase": "^1.99.5",
+    "tailwindcss": "^3",
+    "typescript": "^5"
   }
 }
