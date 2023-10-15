@@ -11,6 +11,7 @@
     "sb:types": "supabase gen types typescript --project-id xrflzqomcvbmhaganhbf --schema public > ./src/lib/supabaseTypes.ts && better-supabase-types -i ./src/lib/supabaseTypes.ts -f"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "next": "13.5.4",
     "react": "^18",
