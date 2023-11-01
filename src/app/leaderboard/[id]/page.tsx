@@ -13,6 +13,8 @@ type User = {
   level: number;
 };
 
+export const revalidate = 3600;
+
 export default async function Page({ params }: { params: { id: string } }) {
   const supaResGuild = await supabase
     .from('guild')
