@@ -72,9 +72,13 @@ export default async function Page({ params }: { params: { id: string } }) {
       },
     }).then((v) => v.json());
 
+    if (!user.avatar) {
+      console.log(user);
+    }
+
     return {
       id: v.id,
-      avatarUrl: user.avatar.startsWith('a_')
+      avatarUrl: !user.avatar ? 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png' : user.avatar.startsWith('a_')
         ? `https://cdn.discordapp.com/avatars/${v.member_id}/${user.avatar}.gif?size=60`
         : `https://cdn.discordapp.com/avatars/${v.member_id}/${user.avatar}.webp?size=60`,
       username: user.username,
