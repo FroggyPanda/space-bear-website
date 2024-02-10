@@ -72,10 +72,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       },
     }).then((v) => v.json());
 
-    if (!user.avatar) {
-      console.log(user);
-    }
-
     return {
       id: v.id,
       avatarUrl: !user.avatar ? 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png' : user.avatar.startsWith('a_')
